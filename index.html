@@ -1,65 +1,1268 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spider-Man</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <h1>Spider Man</h1>
-    <img src="assets/spiderman_img.png" id="mainImg" />
-    <h2>About</h2>
-    <p>
-      <b>Spider-Man</b> is a superhero appearing in American comic books
-      published by
-      <a href="https://www.google.com/search?q=Marvel+Comics">Marvel Comics</a>.
-      Created by writer-editor <b>Stan Lee</b> and artist <b>Steve Ditko</b>, he
-      first appeared in the anthology comic book
-      <a href="https://www.google.com/search?q=Amazing+Fantasy"
-        >Amazing Fantasy</a
-      >
-      #15 (August 1962) in the <a href="#">Silver Age of Comic Books</a>. He has
-      been featured in comic books, television shows, films, video games,
-      novels, and plays
-    </p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Shashi Prakash — Software Engineer Portfolio" />
+  <title>Shashi Prakash | Software Engineer</title>
 
-    <div class="box">
-      <h4>Publication Info</h4>
-      <ul>
-        <li><a href="#" class="boxLink">Publisher</a></li>
-        <li><a href="#" class="boxLink">First Appearance</a></li>
-        <li>
-          Created by
-          <ul>
-            <li><a href="#" class="boxLink">Stan Lee</a></li>
-            <li><a href="#" class="boxLink">Steve Ditko</a></li>
-          </ul>
-        </li>
-      </ul>
+  <style>
+    :root{
+      --bg:#f7f7f5;
+      --ink:#111111;
+      --muted:#66635e;
+      --soft:#ecebe7;
+      --line:#dcdad4;
+      --card:#ffffff;
+      --accent:#191919;
+      --radius:22px;
+      --max:1180px;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.55;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    button{font:inherit}
+    .container{width:min(var(--max),calc(100% - 42px));margin:auto}
+
+    /* NAV */
+    .nav-wrap{
+      position:fixed;
+      inset:18px 0 auto;
+      z-index:50;
+      pointer-events:none;
+    }
+
+    nav{
+      width:min(var(--max),calc(100% - 42px));
+      margin:auto;
+      height:62px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 16px 0 20px;
+      background:rgba(255,255,255,.84);
+      backdrop-filter:blur(18px);
+      border:1px solid rgba(17,17,17,.08);
+      border-radius:18px;
+      box-shadow:0 12px 40px rgba(0,0,0,.06);
+      pointer-events:auto;
+    }
+
+    .brand{
+      font-weight:900;
+      letter-spacing:-.05em;
+      font-size:20px;
+    }
+
+    .links{
+      display:flex;
+      gap:24px;
+      align-items:center;
+      font-size:13px;
+      color:#5b5955;
+    }
+
+    .links a:hover{color:#000}
+
+    .resume-nav{
+      background:#111;
+      color:#fff;
+      padding:9px 13px;
+      border-radius:11px;
+      font-weight:700;
+    }
+
+    /* GENERAL */
+    section{padding:105px 0}
+
+    .section-kicker{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:#77736c;
+      font-weight:800;
+      margin-bottom:12px;
+    }
+
+    .section-title{
+      font-size:clamp(36px,5vw,58px);
+      line-height:1;
+      letter-spacing:-.055em;
+    }
+
+    .section-sub{
+      color:var(--muted);
+      max-width:620px;
+      margin-top:15px;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding-top:145px;
+      padding-bottom:70px;
+      position:relative;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1fr 330px;
+      gap:60px;
+      align-items:end;
+    }
+
+    .availability{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:8px 12px;
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:999px;
+      font-size:12px;
+      color:#5f5c56;
+      margin-bottom:25px;
+    }
+
+    .dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#27a65b;
+      box-shadow:0 0 0 5px rgba(39,166,91,.1);
+    }
+
+    .hero h1{
+      font-size:clamp(62px,9vw,120px);
+      line-height:.86;
+      letter-spacing:-.075em;
+      max-width:920px;
+    }
+
+    .hero h1 .light{
+      color:#8c8982;
+    }
+
+    .hero-role{
+      font-size:clamp(20px,2.2vw,28px);
+      font-weight:700;
+      margin-top:26px;
+      letter-spacing:-.03em;
+    }
+
+    .hero-copy{
+      max-width:670px;
+      margin-top:12px;
+      color:var(--muted);
+      font-size:17px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:11px;
+      margin-top:28px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:12px 17px;
+      border:1px solid #cbc8c1;
+      background:#fff;
+      border-radius:12px;
+      font-size:13px;
+      font-weight:800;
+      transition:transform .2s ease,background .2s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn.dark{
+      background:#111;
+      color:#fff;
+      border-color:#111;
+    }
+
+    .hero-meta{
+      display:grid;
+      gap:12px;
+    }
+
+    .meta-card{
+      padding:18px;
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+    }
+
+    .meta-label{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:#87837c;
+      font-weight:800;
+    }
+
+    .meta-value{
+      font-weight:800;
+      margin-top:7px;
+      letter-spacing:-.02em;
+    }
+
+    /* STATS */
+    .strip{
+      border-top:1px solid var(--line);
+      border-bottom:1px solid var(--line);
+      background:#efeee9;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+    }
+
+    .stat{
+      padding:27px 22px;
+      border-right:1px solid var(--line);
+    }
+
+    .stat:last-child{
+      border-right:0;
+    }
+
+    .stat strong{
+      display:block;
+      font-size:26px;
+      letter-spacing:-.04em;
+    }
+
+    .stat span{
+      font-size:12px;
+      color:#77736c;
+    }
+
+    /* ABOUT */
+    .split{
+      display:grid;
+      grid-template-columns:.95fr 1.05fr;
+      gap:80px;
+      margin-top:45px;
+    }
+
+    .big-copy{
+      font-size:25px;
+      line-height:1.45;
+      letter-spacing:-.03em;
+    }
+
+    .big-copy strong{
+      font-weight:800;
+    }
+
+    .skill-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:13px;
+    }
+
+    .skill{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:20px;
+    }
+
+    .skill h3{
+      font-size:14px;
+      margin-bottom:6px;
+    }
+
+    .skill p{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    /* TIMELINE */
+    .timeline{
+      margin-top:48px;
+      border-top:1px solid var(--line);
+    }
+
+    .timeline-item{
+      display:grid;
+      grid-template-columns:170px 1fr 150px;
+      gap:24px;
+      padding:28px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .timeline-date{
+      font-size:12px;
+      font-weight:800;
+      color:#7b776f;
+    }
+
+    .timeline-role{
+      font-weight:900;
+      font-size:21px;
+      letter-spacing:-.025em;
+    }
+
+    .timeline-company{
+      margin-top:4px;
+      color:#77736d;
+      font-size:13px;
+    }
+
+    .timeline-desc{
+      margin-top:12px;
+      color:var(--muted);
+      max-width:700px;
+    }
+
+    .timeline-type{
+      justify-self:end;
+      align-self:start;
+      font-size:11px;
+      font-weight:800;
+      color:#6e6a64;
+      padding:7px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:#fff;
+    }
+
+    /* PROJECTS */
+    .projects{
+      margin-top:50px;
+      display:grid;
+      gap:18px;
+    }
+
+    .project{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      overflow:hidden;
+      display:grid;
+      grid-template-columns:1.02fr .98fr;
+      min-height:330px;
+    }
+
+    .project-art{
+      min-height:330px;
+      background:
+        radial-gradient(circle at 30% 35%,#e4e3de 0 9%,transparent 10%),
+        radial-gradient(circle at 65% 55%,#d6d4cc 0 11%,transparent 12%),
+        linear-gradient(135deg,#f2f1ec,#dad8d1);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .project-art::after{
+      content:"";
+      position:absolute;
+      width:190px;
+      height:190px;
+      border:1px solid rgba(0,0,0,.13);
+      border-radius:50%;
+      top:50%;
+      left:50%;
+      transform:translate(-50%,-50%);
+      box-shadow:
+        0 0 0 24px rgba(255,255,255,.1),
+        0 0 0 52px rgba(0,0,0,.035);
+    }
+
+    .project-art.dark{
+      background:linear-gradient(145deg,#1b1b1b,#383838);
+    }
+
+    .project-art.dark::after{
+      border-color:rgba(255,255,255,.18);
+    }
+
+    .project-content{
+      padding:38px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .project-number{
+      font-size:11px;
+      color:#858077;
+      letter-spacing:.12em;
+      font-weight:900;
+    }
+
+    .project h3{
+      margin-top:35px;
+      font-size:32px;
+      line-height:1;
+      letter-spacing:-.05em;
+    }
+
+    .project p{
+      margin-top:15px;
+      color:var(--muted);
+      font-size:14px;
+      max-width:500px;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+      margin-top:18px;
+    }
+
+    .tag{
+      padding:5px 9px;
+      font-size:10px;
+      font-weight:800;
+      border:1px solid var(--line);
+      border-radius:999px;
+      color:#67635c;
+    }
+
+    .project-links{
+      display:flex;
+      gap:9px;
+      margin-top:28px;
+    }
+
+    /* EDUCATION */
+    .education{
+      margin-top:48px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+    }
+
+    .edu-card{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:28px;
+    }
+
+    .edu-year{
+      font-size:12px;
+      color:#817d76;
+      font-weight:800;
+    }
+
+    .edu-card h3{
+      font-size:24px;
+      letter-spacing:-.035em;
+      margin-top:12px;
+    }
+
+    .edu-card p{
+      color:var(--muted);
+      margin-top:5px;
+      font-size:14px;
+    }
+
+    .edu-chip{
+      display:inline-block;
+      margin-top:20px;
+      padding:7px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    /* CONTACT */
+    .contact{
+      background:#111;
+      color:#fff;
+      border-radius:32px;
+      padding:60px;
+      margin-bottom:55px;
+    }
+
+    .contact .section-kicker{
+      color:#9a9893;
+    }
+
+    .contact .section-sub{
+      color:#aaa7a1;
+    }
+
+    .contact h2{
+      max-width:780px;
+    }
+
+    .contact-row{
+      margin-top:38px;
+      display:flex;
+      justify-content:space-between;
+      gap:25px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .contact-email{
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .contact-links{
+      display:flex;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .contact .btn{
+      background:transparent;
+      color:#fff;
+      border-color:#4a4a4a;
+    }
+
+    .contact .btn:hover{
+      background:#1e1e1e;
+    }
+
+    .contact .btn.light{
+      background:#fff;
+      color:#111;
+      border-color:#fff;
+    }
+
+    footer{
+      padding:0 0 30px;
+      color:#88847c;
+      font-size:12px;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    /* REVEAL */
+    .reveal{
+      opacity:0;
+      transform:translateY(18px);
+      transition:opacity .7s ease,transform .7s ease;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:none;
+    }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .hero-grid,
+      .split,
+      .project,
+      .education{
+        grid-template-columns:1fr;
+      }
+
+      .hero-grid{
+        gap:42px;
+      }
+
+      .hero-meta{
+        grid-template-columns:repeat(3,1fr);
+      }
+
+      .timeline-item{
+        grid-template-columns:1fr;
+        gap:8px;
+      }
+
+      .timeline-type{
+        justify-self:start;
+      }
+
+      .project-art{
+        min-height:260px;
+      }
+
+      .stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .stat:nth-child(2){
+        border-right:0;
+      }
+
+      .stat:nth-child(-n+2){
+        border-bottom:1px solid var(--line);
+      }
+    }
+
+    @media(max-width:650px){
+      .container,
+      nav{
+        width:min(var(--max),calc(100% - 28px));
+      }
+
+      .nav-wrap{
+        top:9px;
+      }
+
+      nav{
+        height:56px;
+        padding-left:14px;
+      }
+
+      .links{
+        display:none;
+      }
+
+      .hero{
+        padding-top:120px;
+      }
+
+      .hero h1{
+        font-size:clamp(56px,18vw,88px);
+      }
+
+      .hero-meta{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .stats{
+        grid-template-columns:1fr 1fr;
+      }
+
+      section{
+        padding:80px 0;
+      }
+
+      .skill-grid{
+        grid-template-columns:1fr;
+      }
+
+      .project-content{
+        padding:25px;
+      }
+
+      .contact{
+        padding:35px 25px;
+        border-radius:24px;
+      }
+
+      footer{
+        display:block;
+      }
+
+      footer span+span{
+        display:block;
+        margin-top:5px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <div class="nav-wrap">
+    <nav>
+      <a class="brand" href="#">SP.</a>
+
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <a class="resume-nav" href="resume.pdf" target="_blank">Resume ↗</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="reveal">
+
+          <div class="availability">
+            <span class="dot"></span>
+            Available for software engineering opportunities
+          </div>
+
+          <h1>
+            Shashi<br>
+            <span class="light">Prakash.</span>
+          </h1>
+
+          <div class="hero-role">
+            Software Engineer in progress · C++ & Python · Full-Stack Development
+          </div>
+
+          <p class="hero-copy">
+            B.Tech Electronics & Communication Engineering student at JNU School of Engineering.
+            I enjoy solving problems, building useful software, and going deeper into backend systems,
+            DSA, and AI-powered applications.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn dark" href="#projects">Explore Projects ↓</a>
+            <a class="btn" href="resume.pdf" target="_blank">Download Resume</a>
+            <a class="btn" href="mailto:YOUR_EMAIL@example.com">Get in touch</a>
+          </div>
+
+        </div>
+
+        <div class="hero-meta reveal">
+
+          <div class="meta-card">
+            <div class="meta-label">Based in</div>
+            <div class="meta-value">Delhi, India</div>
+          </div>
+
+          <div class="meta-card">
+            <div class="meta-label">Graduation</div>
+            <div class="meta-value">June 2027</div>
+          </div>
+
+          <div class="meta-card">
+            <div class="meta-label">Looking for</div>
+            <div class="meta-value">SWE / Backend / SDE Roles</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS -->
+    <div class="strip">
+      <div class="container stats">
+
+        <div class="stat">
+          <strong>DSA</strong>
+          <span>Core problem-solving focus</span>
+        </div>
+
+        <div class="stat">
+          <strong>MERN</strong>
+          <span>Full-stack development</span>
+        </div>
+
+        <div class="stat">
+          <strong>CV / ML</strong>
+          <span>Applied AI work</span>
+        </div>
+
+        <div class="stat">
+          <strong>C++</strong>
+          <span>Primary problem-solving language</span>
+        </div>
+
+      </div>
     </div>
 
-    <h2>Creation & Development</h2>
-    <p id="description">
-      In 1962, with the success of the Fantastic Four, Marvel Comics editor and
-      head writer Stan Lee was casting for a new superhero idea. He said the
-      idea for Spider-Man arose from a surge in teenage demand for comic books
-      and the desire to create a character with whom teens could identify. As
-      with Fantastic Four, Lee saw Spider-Man as an opportunity to "get out of
-      his system" what he felt was missing in comic books. In his autobiography,
-      Lee cites the non-superhuman pulp magazine crime fighter the Spider as a
-      great influence, and in a multitude of print and video interviews, Lee
-      stated he was further inspired by seeing a spider climb up a wall—adding
-      in his autobiography that he has told that story so often he has become
-      unsure of whether or not this is true.
-    </p>
-    <div class="images">
-      <img src="assets/creation_1.png" class="oldImg" />
-      <img src="assets/creation_2.jpeg" class="oldImg" />
-      <img src="assets/creation_3.jpeg" class="oldImg" />
-    </div>
+    <!-- ABOUT -->
+    <section id="about">
 
-    <script src="app.js"></script>
-  </body>
+      <div class="container reveal">
+
+        <div class="section-kicker">01 / Overview</div>
+
+        <h2 class="section-title">Who am I?</h2>
+
+        <p class="section-sub">
+          An engineering student moving deliberately toward software engineering.
+        </p>
+
+        <div class="split">
+
+          <div class="big-copy">
+            I’m building my foundation across
+            <strong>data structures, algorithms, software development,
+            backend engineering, and AI/ML</strong>.
+
+            <br><br>
+
+            I care about understanding the “why” behind a system,
+            not just making a feature pass. My current goal is to turn
+            that foundation into strong production-oriented projects and
+            become the kind of engineer who can own a problem from idea
+            to implementation.
+          </div>
+
+          <div class="skill-grid">
+
+            <div class="skill">
+              <h3>Languages</h3>
+              <p>C++ · Python · JavaScript · HTML · CSS</p>
+            </div>
+
+            <div class="skill">
+              <h3>Frontend</h3>
+              <p>React · responsive UI · modern JavaScript</p>
+            </div>
+
+            <div class="skill">
+              <h3>Backend</h3>
+              <p>Node.js · Express · REST APIs · MongoDB</p>
+            </div>
+
+            <div class="skill">
+              <h3>CS Fundamentals</h3>
+              <p>DSA · OOP · DBMS · Computer Networks · OS</p>
+            </div>
+
+            <div class="skill">
+              <h3>AI / ML</h3>
+              <p>NumPy · Computer Vision · ML fundamentals</p>
+            </div>
+
+            <div class="skill">
+              <h3>Tools</h3>
+              <p>Git · GitHub · VS Code · Kaggle · Linux basics</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience">
+
+      <div class="container reveal">
+
+        <div class="section-kicker">02 / Timeline</div>
+
+        <h2 class="section-title">Experience & journey.</h2>
+
+        <p class="section-sub">
+          The technical path I’m currently building toward software engineering.
+        </p>
+
+        <div class="timeline">
+
+          <div class="timeline-item">
+
+            <div class="timeline-date">
+              2026 — PRESENT
+            </div>
+
+            <div>
+
+              <div class="timeline-role">
+                Software Engineering Preparation
+              </div>
+
+              <div class="timeline-company">
+                DSA · Full Stack · Backend · System Design
+              </div>
+
+              <div class="timeline-desc">
+                Deepening algorithmic problem solving while building practical
+                full-stack projects and developing backend and system-design
+                fundamentals for SWE recruiting.
+              </div>
+
+            </div>
+
+            <div class="timeline-type">
+              CURRENT
+            </div>
+
+          </div>
+
+          <div class="timeline-item">
+
+            <div class="timeline-date">
+              2026
+            </div>
+
+            <div>
+
+              <div class="timeline-role">
+                VISTAC-2 · Computer Vision Project
+              </div>
+
+              <div class="timeline-company">
+                Academic Project
+              </div>
+
+              <div class="timeline-desc">
+                Working on visual tracking in adverse conditions, including
+                dataset exploration, experimentation, model development,
+                and evaluation.
+              </div>
+
+            </div>
+
+            <div class="timeline-type">
+              PROJECT
+            </div>
+
+          </div>
+
+          <div class="timeline-item">
+
+            <div class="timeline-date">
+              2023 — 2027
+            </div>
+
+            <div>
+
+              <div class="timeline-role">
+                B.Tech in Electronics & Communication Engineering
+              </div>
+
+              <div class="timeline-company">
+                JNU School of Engineering
+              </div>
+
+              <div class="timeline-desc">
+                Engineering foundation spanning programming, mathematics,
+                electronics, signals, communication systems, digital image
+                processing, and computer vision.
+              </div>
+
+            </div>
+
+            <div class="timeline-type">
+              EDUCATION
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+
+      <div class="container reveal">
+
+        <div class="section-kicker">03 / Portfolio</div>
+
+        <h2 class="section-title">Featured projects.</h2>
+
+        <p class="section-sub">
+          This section is intentionally built to spotlight projects recruiters can scan quickly.
+        </p>
+
+        <div class="projects">
+
+          <!-- PROJECT 1 -->
+          <article class="project">
+
+            <div class="project-art"></div>
+
+            <div class="project-content">
+
+              <div>
+
+                <div class="project-number">
+                  PROJECT 01
+                </div>
+
+                <h3>
+                  VISTAC-2
+                </h3>
+
+                <p>
+                  Visual tracking in adverse conditions using computer
+                  vision and machine learning. Built as an academic project
+                  around challenging real-world visual data.
+                </p>
+
+                <div class="tags">
+
+                  <span class="tag">Python</span>
+                  <span class="tag">Computer Vision</span>
+                  <span class="tag">Deep Learning</span>
+                  <span class="tag">Kaggle</span>
+
+                </div>
+
+              </div>
+
+              <div class="project-links">
+
+                <a class="btn dark" href="#" target="_blank">
+                  GitHub ↗
+                </a>
+
+                <a class="btn" href="#" target="_blank">
+                  Case Study ↗
+                </a>
+
+              </div>
+
+            </div>
+          </article>
+
+          <!-- PROJECT 2 -->
+          <article class="project">
+
+            <div class="project-art dark"></div>
+
+            <div class="project-content">
+
+              <div>
+
+                <div class="project-number">
+                  PROJECT 02
+                </div>
+
+                <h3>
+                  MERN Application
+                </h3>
+
+                <p>
+                  Replace this card with your strongest full-stack application.
+                  Ideally show the problem, architecture, your contribution,
+                  and one or two measurable outcomes.
+                </p>
+
+                <div class="tags">
+
+                  <span class="tag">React</span>
+                  <span class="tag">Node.js</span>
+                  <span class="tag">Express</span>
+                  <span class="tag">MongoDB</span>
+
+                </div>
+
+              </div>
+
+              <div class="project-links">
+
+                <a class="btn dark" href="#" target="_blank">
+                  GitHub ↗
+                </a>
+
+                <a class="btn" href="#" target="_blank">
+                  Live ↗
+                </a>
+
+              </div>
+
+            </div>
+          </article>
+
+          <!-- PROJECT 3 -->
+          <article class="project">
+
+            <div class="project-art"></div>
+
+            <div class="project-content">
+
+              <div>
+
+                <div class="project-number">
+                  PROJECT 03
+                </div>
+
+                <h3>
+                  DSA / Algorithms
+                </h3>
+
+                <p>
+                  Turn this into a curated algorithm repository rather than
+                  a generic “LeetCode profile”. Highlight patterns, notes,
+                  optimized solutions, and links to representative problems.
+                </p>
+
+                <div class="tags">
+
+                  <span class="tag">C++</span>
+                  <span class="tag">DSA</span>
+                  <span class="tag">Algorithms</span>
+                  <span class="tag">Problem Solving</span>
+
+                </div>
+
+              </div>
+
+              <div class="project-links">
+
+                <a class="btn dark" href="#" target="_blank">
+                  GitHub ↗
+                </a>
+
+                <a class="btn" href="#" target="_blank">
+                  LeetCode ↗
+                </a>
+
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+
+      <div class="container reveal">
+
+        <div class="section-kicker">
+          04 / Academic
+        </div>
+
+        <h2 class="section-title">
+          Education.
+        </h2>
+
+        <p class="section-sub">
+          A concise academic snapshot — easy for a recruiter to skim.
+        </p>
+
+        <div class="education">
+
+          <article class="edu-card">
+
+            <div class="edu-year">
+              2023 — 2027
+            </div>
+
+            <h3>
+              B.Tech · Electronics & Communication Engineering
+            </h3>
+
+            <p>
+              JNU School of Engineering · New Delhi
+            </p>
+
+            <span class="edu-chip">
+              UNDERGRADUATE
+            </span>
+
+          </article>
+
+          <article class="edu-card">
+
+            <div class="edu-year">
+              CURRENT FOCUS
+            </div>
+
+            <h3>
+              Software Engineering
+            </h3>
+
+            <p>
+              DSA · Full Stack · Backend Systems · AI / ML · Computer Vision
+            </p>
+
+            <span class="edu-chip">
+              BUILDING TOWARD SWE
+            </span>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+
+      <div class="container">
+
+        <div class="contact reveal">
+
+          <div class="section-kicker">
+            05 / Inquiries
+          </div>
+
+          <h2 class="section-title">
+            Let’s build<br>
+            something useful.
+          </h2>
+
+          <p class="section-sub">
+            I’m interested in software engineering internships,
+            graduate roles, and strong engineering collaborations.
+          </p>
+
+          <div class="contact-row">
+
+            <div class="contact-email">
+              YOUR_EMAIL@example.com
+            </div>
+
+            <div class="contact-links">
+
+              <a class="btn light"
+                 href="mailto:YOUR_EMAIL@example.com">
+                Email
+              </a>
+
+              <a class="btn"
+                 href="https://github.com/YOUR_USERNAME"
+                 target="_blank">
+                GitHub ↗
+              </a>
+
+              <a class="btn"
+                 href="https://www.linkedin.com/in/YOUR_USERNAME/"
+                 target="_blank">
+                LinkedIn ↗
+              </a>
+
+              <a class="btn"
+                 href="https://leetcode.com/YOUR_USERNAME/"
+                 target="_blank">
+                LeetCode ↗
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+
+        <footer>
+          <span>© 2026 Shashi Prakash</span>
+          <span>Designed & built with HTML, CSS & JavaScript.</span>
+        </footer>
+
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+
+    document.querySelectorAll(".reveal").forEach((el) => {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
 </html>
